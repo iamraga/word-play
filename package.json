@@ -1,0 +1,23 @@
+{
+    "name": "word-play",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "dev": "next",
+        "build": "next build",
+        "start": "next start"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@zeit/next-css": "^1.0.1",
+        "antd": "^3.23.6",
+        "babel-plugin-import": "^1.12.2",
+        "next": "^9.1.1",
+        "null-loader": "^3.0.0",
+        "react": "^16.10.2",
+        "react-dom": "^16.10.2",
+        "react-sortable": "^2.0.0"
+    }
+}
