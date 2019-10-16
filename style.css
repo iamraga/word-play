@@ -95,3 +95,14 @@ body {
 .actionBtns {
     width: 100%;
 }
+
+.hintDiv {
+    font-size: 16px;
+    margin: 6px 0px;
+    padding: 6px 25px;
+    border: 1px solid #4b83e8;
+    border-radius: 25px;
+    text-align: center;
+    flex-grow: inherit;
+    width: auto;
+}

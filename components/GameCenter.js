@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Row, Col, Typography, Button, Icon } from 'antd'; 
+import { Row, Col, Typography, Button, Icon, Modal } from 'antd'; 
 import { getQuestions, getAnswers } from '../words';
 import SortableLetters from '../components/SortableLetters';
 
 const { Text, Title } = Typography;
+const { confirm } = Modal;
 
 export default class GameCenter extends Component {
 
@@ -25,6 +26,7 @@ export default class GameCenter extends Component {
 
         this.onGameBegin = this.onGameBegin.bind(this);
         this.toNextWord = this.toNextWord.bind(this);
+        this.showHint = this.showHint.bind(this);
     }
 
     componentDidMount() {
@@ -50,7 +52,6 @@ export default class GameCenter extends Component {
 
     onGameBegin(event) {
         let round = (this.state.round + 1);
-        console.log(this.state.level);
         this.props.disableOtherLevels("true");
         this.setState({
             isStarted: true,
@@ -66,6 +67,17 @@ export default class GameCenter extends Component {
             round,
             currentQn,
         });
+        console.log(this.state.hintsUsed);
+    }
+
+    showHint(event) {
+        let hintVal = 'showHint' + event.target.value;
+        let { currentQn } = this.state;
+        currentQn[hintVal] = true;
+        this.setState({
+            hintsUsed: this.state.hintsUsed + 1,
+            currentQn
+        })
     }
 
     render() {
@@ -92,14 +104,50 @@ export default class GameCenter extends Component {
             );
         }
         else {
-            let letterBlocks = this.state.currentQn.word.split('');
+            let { currentQn } = this.state;
+            let letterBlocks = currentQn.word.split('');
+            let hint2 = (currentQn.showHint2) ? (
+                <Col span={24}>
+                    <div className="hintDiv">
+                        <Text type="secondary" style={{fontSize: '16px', marginRight: '5px'}}>Hint 2 : </Text>
+                        <Text style={{fontSize: '24px'}}>{currentQn.hint2}</Text>
+                    </div>
+                </Col>
+            ) : (
+                <Col span={24}>
+                    <div style={{display: 'flex', justifyContent: 'center', margin: '5px 0px'}}>
+                        <Button type="dashed" disabled={!currentQn.showHint1} icon="bulb" onClick={this.showHint} value='2'>Show Hint 2</Button>
+                    </div>
+                </Col>
+            );
+            let hint1 = (currentQn.showHint1) ? (
+                <Col span={24}>
+                    <div className="hintDiv">
+                        <Text type="secondary" style={{fontSize: '16px', marginRight: '5px'}}>Hint 1 : </Text>
+                        <Text>{currentQn.hint1}</Text>
+                    </div>
+                </Col>
+            ) : (
+                <Col span={24}>
+                    <div style={{display: 'flex', justifyContent: 'center', margin: '5px 0px'}}>
+                        <Button type="dashed" icon="bulb" onClick={this.showHint} value='1'>Show Hint 1</Button>
+                    </div>
+                </Col>
+            );
+            let hints = (
+                <Row className="hintsCont">
+                    {hint1}
+                    {hint2}
+                </Row>
+            )
             
             content = (
                 <div className="gameIntro">
                     <Title level={3}>Round {this.state.round}</Title>
-                    <Row type="flex" justify="center" style={{padding: '60px 0px'}}>
+                    {hints}
+                    <Row type="flex" justify="center" style={{padding: '50px 0px'}}>
                         <Col span={24}>
-                            <SortableLetters letters={letterBlocks} currentQn={this.state.currentQn} />
+                            <SortableLetters letters={letterBlocks} currentQn={currentQn} />
                         </Col>
                     </Row>
                     <Row style={{padding: '15px 0px'}} style={{alignSelf: 'stretch'}}>
