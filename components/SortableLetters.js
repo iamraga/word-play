@@ -22,6 +22,7 @@ export default class SortableLetters extends Component {
 
     onSortItems(items) {
         this.setState({letters: items});
+        this.props.afterSort(this.state.letters);
     }
 
     render() {
