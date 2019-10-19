@@ -4,6 +4,7 @@ import { getQuestions, getAnswers } from '../words';
 import SortableLetters from '../components/SortableLetters';
 import StatusBar from '../components/StatusBar';
 import EndGame from '../components/EndGame';
+import ResultPage from '../components/ResultPage';
 
 const { Text, Title } = Typography;
 
@@ -23,7 +24,8 @@ export default class GameCenter extends Component {
             wrong: 0,
             hintsUsed: 0,
             noOfAttempts: 0,
-            isStarted: false
+            isStarted: false,
+            isResultPage: false
         }
         this.state = this.initialState;
 
@@ -84,7 +86,27 @@ export default class GameCenter extends Component {
     }
 
     validateWord(event) {
-        console.log("validate and include animation");
+        let letters = this.state.currentSortedItems.join('');
+        if(this.state.answers[this.state.round - 1] === letters) {
+            let correct = this.state.correct + 1;
+            this.setState({
+                correct
+            });
+            if(this.state.round < this.state.questions.length) {
+                let round = this.state.round + 1;
+                let currentQn = this.state.questions[round-1];
+                this.setState({
+                    round, 
+                    currentQn
+                });
+            }
+            else {
+                this.setState({isResultPage: true});
+            }
+        }
+        else {
+            console.log('failure');
+        }
     }
 
     skip(event) {
@@ -207,7 +229,7 @@ export default class GameCenter extends Component {
             <div className="gameDiv">
                 <Row type="flex" justify="center">
                     <Col span={20}>
-                        {content}
+                        {this.state.isResultPage ? (<ResultPage {...this.state} />) : content}
                     </Col>
                 </Row>
             </div>
