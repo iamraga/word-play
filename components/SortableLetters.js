@@ -39,7 +39,7 @@ export default class SortableLetters extends Component {
         ));
 
         return (
-            <ul className="letterBlocks">
+            <ul className="letterBlocks" id="letterBlocks">
                 {blocks}
             </ul>
         )

@@ -95,6 +95,7 @@ export default class GameCenter extends Component {
             this.setState({
                 correct
             });
+            document.getElementById("gameDiv").classList.add("rightAnswer");
         }
         else {
             this.setState({
@@ -103,20 +104,25 @@ export default class GameCenter extends Component {
             if(!isAnswerRight && this.state.noOfAttempts >= 3) {
                 this.setState({wrong: this.state.wrong + 1});
             }
+            document.getElementById("letterBlocks").classList.add("wrongAnswer");
         }
-        if((isAnswerRight && !isLastWord) || (!isAnswerRight && this.state.noOfAttempts >= 3 && !isLastWord)) {
-            let round = this.state.round + 1;
-            let currentQn = this.state.questions[round-1];
-            this.setState({
-                round, 
-                currentQn,
-                currentSortedItems: currentQn.word.split(''),
-                noOfAttempts: 0
-            });
-        }
-        else if(isLastWord && this.state.noOfAttempts >= 3) {
-            this.setState({isResultPage: true});
-        }
+        setTimeout(() => {
+            document.getElementById("gameDiv").classList.remove("rightAnswer");
+            document.getElementById("letterBlocks").classList.remove("wrongAnswer");
+            if((isAnswerRight && !isLastWord) || (!isAnswerRight && this.state.noOfAttempts >= 3 && !isLastWord)) {
+                let round = this.state.round + 1;
+                let currentQn = this.state.questions[round-1];
+                this.setState({
+                    round, 
+                    currentQn,
+                    currentSortedItems: currentQn.word.split(''),
+                    noOfAttempts: 0
+                });
+            }
+            else if(isLastWord && this.state.noOfAttempts >= 3) {
+                this.setState({isResultPage: true});
+            }
+        }, 600);
     }
 
     skip(event) {
@@ -241,7 +247,7 @@ export default class GameCenter extends Component {
         }
 
         return (
-            <div className="gameDiv">
+            <div className="gameDiv" id="gameDiv">
                 <Row type="flex" justify="center">
                     <Col span={20}>
                         {this.state.isResultPage ? (<ResultPage {...this.state} newGame={this.newGame} />) : content}

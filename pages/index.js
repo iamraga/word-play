@@ -11,13 +11,13 @@ function Index() {
         <Layout>
             <Header className="header">
                 <div className="title">WORDPLAY</div>
-                <ContactDetails />
             </Header>
             <Content style={{padding: '40px'}}>
                 <WordPlay />
             </Content>
-            <Footer style={{textAlign: 'center', backgroundColor: '#dadada'}}>
-                Check out the source here
+            <Footer style={{textAlign: 'center', backgroundColor: '#dadada', boxShadow: '0px -3px 10px -8px #000'}}>
+                <ContactDetails />
+                <a href="https://github.com/iamraga/word-play" target="_blank" style={{color: '#000'}}>Check out the source code here</a>
             </Footer>
         </Layout>
     )
