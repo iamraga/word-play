@@ -125,7 +125,7 @@ body {
 }
 
 .statistics {
-    margin-top: 20px;
+    margin: 20px 0px;
     width: 40%;
     padding: 25px 0px;
     border: 2px solid #52c41a;

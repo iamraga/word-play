@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Typography, Icon } from 'antd';
+import { Row, Col, Typography, Icon, Button } from 'antd';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -18,6 +18,7 @@ const ResultPage = (props) => {
                         <Paragraph><Text strong>Wrong Answers : </Text><Text>{props.wrong}</Text></Paragraph>
                         <Paragraph><Text strong>Total number of hints used : </Text><Text>{props.hintsUsed}</Text></Paragraph>
                     </div>
+                    <Button type="primary" size="large" shape="round" onClick={props.newGame} style={{padding: '0px 75px', margin: '15px 0px 10px 0px'}}>Start new game</Button>
                 </Col>
             </Row>
         </div>

@@ -35,6 +35,7 @@ export default class GameCenter extends Component {
         this.endGame = this.endGame.bind(this);
         this.validateWord = this.validateWord.bind(this);
         this.setLettersAfterSort = this.setLettersAfterSort.bind(this);
+        this.newGame = this.newGame.bind(this);
     }
 
     componentDidMount() {
@@ -87,25 +88,34 @@ export default class GameCenter extends Component {
 
     validateWord(event) {
         let letters = this.state.currentSortedItems.join('');
-        if(this.state.answers[this.state.round - 1] === letters) {
+        let isAnswerRight = this.state.answers[this.state.round - 1] === letters;
+        let isLastWord = this.state.round >= this.state.questions.length;
+        if(isAnswerRight) {
             let correct = this.state.correct + 1;
             this.setState({
                 correct
             });
-            if(this.state.round < this.state.questions.length) {
-                let round = this.state.round + 1;
-                let currentQn = this.state.questions[round-1];
-                this.setState({
-                    round, 
-                    currentQn
-                });
-            }
-            else {
-                this.setState({isResultPage: true});
-            }
         }
         else {
-            console.log('failure');
+            this.setState({
+                noOfAttempts: this.state.noOfAttempts + 1
+            });
+            if(!isAnswerRight && this.state.noOfAttempts >= 3) {
+                this.setState({wrong: this.state.wrong + 1});
+            }
+        }
+        if((isAnswerRight && !isLastWord) || (!isAnswerRight && this.state.noOfAttempts >= 3 && !isLastWord)) {
+            let round = this.state.round + 1;
+            let currentQn = this.state.questions[round-1];
+            this.setState({
+                round, 
+                currentQn,
+                currentSortedItems: currentQn.word.split(''),
+                noOfAttempts: 0
+            });
+        }
+        else if(isLastWord && this.state.noOfAttempts >= 3) {
+            this.setState({isResultPage: true});
         }
     }
 
@@ -117,7 +127,8 @@ export default class GameCenter extends Component {
             wrong,
             round,
             currentQn,
-            currentSortedItems: currentQn.word.split('')
+            currentSortedItems: currentQn.word.split(''),
+            noOfAttempts: 0
         });
     }
 
@@ -130,6 +141,11 @@ export default class GameCenter extends Component {
             questions,
             answers
         });
+    }
+
+    newGame() {
+        this.setState(this.initialState);
+        this.props.disableOtherLevels(false);
     }
 
     render() {
@@ -157,7 +173,6 @@ export default class GameCenter extends Component {
         }
         else {
             let { currentQn } = this.state;
-            let validateText = (this.state.round === 5) ? 'Submit and View Result': 'Validate';
             let hint2 = (currentQn.showHint2) ? (
                 <Col span={24}>
                     <div className="hintDiv">
@@ -195,7 +210,7 @@ export default class GameCenter extends Component {
             
             content = (
                 <div className="gameIntro">
-                    <Title level={3}>Round {this.state.round}</Title>
+                    <Title level={3}>Round {this.state.round} of {this.state.questions.length}</Title>
                     <StatusBar wrong={this.state.wrong} hintsUsed={this.state.hintsUsed} correct={this.state.correct} noOfAttempts={this.state.noOfAttempts} />
                     {hints}
                     <Row type="flex" justify="center" style={{padding: '50px 0px'}}>
@@ -206,7 +221,7 @@ export default class GameCenter extends Component {
                     <Row style={{padding: '15px 0px'}} style={{alignSelf: 'stretch'}}>
                         <Col span={10} offset={7}>
                             <Button type="primary" size="large" className="actionBtns" onClick={this.validateWord}>
-                                {validateText}
+                                Validate
                             </Button>
                         </Col>
                     </Row>
@@ -229,7 +244,7 @@ export default class GameCenter extends Component {
             <div className="gameDiv">
                 <Row type="flex" justify="center">
                     <Col span={20}>
-                        {this.state.isResultPage ? (<ResultPage {...this.state} />) : content}
+                        {this.state.isResultPage ? (<ResultPage {...this.state} newGame={this.newGame} />) : content}
                     </Col>
                 </Row>
             </div>
