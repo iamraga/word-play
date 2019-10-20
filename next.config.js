@@ -22,18 +22,6 @@ module.exports = withCss({
         test: antStyles,
         use: 'null-loader',
       });
-      const extractCSSPlugin = new ExtractTextPlugin({
-        filename: 'style.css',
-        disable: dev
-      })
-      config.module.rules.unshift({
-        test: /\.css$/,
-        use: cssLoaderConfig(extractCSSPlugin, {
-          cssModules,
-          dev,
-          isServer
-        })
-      })
     }
     return config
   },
