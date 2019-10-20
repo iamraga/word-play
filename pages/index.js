@@ -12,7 +12,7 @@ function Index() {
             <Header className="header">
                 <div className="title">WORDPLAY</div>
             </Header>
-            <Content style={{padding: '40px'}}>
+            <Content style={{padding: '30px 40px 40px'}}>
                 <WordPlay />
             </Content>
             <Footer style={{textAlign: 'center', backgroundColor: '#dadada', boxShadow: '0px -3px 10px -8px #000'}}>
