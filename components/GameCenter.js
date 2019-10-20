@@ -211,8 +211,8 @@ export default class GameCenter extends Component {
             );
             let hints = (
                 <Row className="hintsCont">
-                    <Col span={24} style={{textAlign: 'center'}} >
-                        <Text strong style={{fontSize: '16px', marginRight: '5px'}}>Category : </Text>
+                    <Col span={24} style={{textAlign: 'center', fontSize: '20px'}} >
+                        <Text strong style={{marginRight: '5px'}}>Category : </Text>
                         <Text>{currentQn.category}</Text>
                     </Col>
                     {hint1}
