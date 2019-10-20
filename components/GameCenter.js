@@ -98,10 +98,11 @@ export default class GameCenter extends Component {
             document.getElementById("gameDiv").classList.add("rightAnswer");
         }
         else {
+            let noOfAttempts = this.state.noOfAttempts + 1;
             this.setState({
-                noOfAttempts: this.state.noOfAttempts + 1
+                noOfAttempts,
             });
-            if(!isAnswerRight && this.state.noOfAttempts >= 3) {
+            if(!isAnswerRight && noOfAttempts >= 3) {
                 this.setState({wrong: this.state.wrong + 1});
             }
             document.getElementById("letterBlocks").classList.add("wrongAnswer");
@@ -163,14 +164,15 @@ export default class GameCenter extends Component {
             content = (
                 <div className="gameIntro">
                     <Title level={3}>Welcome to Wordplay</Title>
-                    <Text code>Level : {this.state.level}</Text>
+                    <Text style={{fontSize: '16px'}} code>Level : {this.state.level}</Text>
                     <Title level={4} style={{marginTop: '15px'}}>The rules are simple</Title>
                     <ul className="rules">
                         <li><Icon type="form" className="bulletin" />There will be 10 rounds</li>
                         <li><Icon type="form" className="bulletin" />The letters of a word will be given to you jumbled randomly</li>
                         <li><Icon type="form" className="bulletin" />Rearrange the letter blocks and submit to guess the right word</li>
                         <li><Icon type="form" className="bulletin" />If you're out of ideas, you can use up to 2 hints for a word</li>
-                        <li><Icon type="form" className="bulletin" />Clicking on 'Give up' will mark that word as wrongly answered and will jump to the next word</li>
+                        <li><Icon type="form" className="bulletin" />The maximum number of attempts in a round is 3, failing which the round will be marked 'wrongly answered'.</li>
+                        <li><Icon type="form" className="bulletin" />Clicking on 'Skip to next word' will mark that word as wrongly answered and will jump to the next word</li>
                         <li><Icon type="form" className="bulletin" />Kindly do not hit the refresh or back button. This will reset the game and erase your progress</li>
                     </ul>
                     <Button type="primary" size="large" shape="round" onClick={this.onGameBegin} style={{padding: '0px 75px', margin: '10px 0px'}}>Lets Begin!</Button>
@@ -209,6 +211,10 @@ export default class GameCenter extends Component {
             );
             let hints = (
                 <Row className="hintsCont">
+                    <Col span={24} style={{textAlign: 'center'}} >
+                        <Text strong style={{fontSize: '16px', marginRight: '5px'}}>Category : </Text>
+                        <Text>{currentQn.category}</Text>
+                    </Col>
                     {hint1}
                     {hint2}
                 </Row>
