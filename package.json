@@ -16,10 +16,12 @@
         "@zeit/next-css": "^1.0.1",
         "antd": "^3.23.6",
         "babel-plugin-import": "^1.12.2",
+        "css-loader": "^3.2.0",
         "next": "^9.1.1",
         "null-loader": "^3.0.0",
         "react": "^16.10.2",
         "react-dom": "^16.10.2",
-        "react-sortable": "^2.0.0"
+        "react-sortable": "^2.0.0",
+        "style-loader": "^1.0.0"
     }
 }
