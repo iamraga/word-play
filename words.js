@@ -16,17 +16,17 @@ const easy = [
     },
     {
         category: "Tech",
-        hint1: "This machine makes a lot of work easy",
+        hint1: "Computing you can carry everywhere",
         hint2: "_ a _ t _ _"
     },
     {
         category: "Entertainment",
-        hint1: "It is not an end, it continues as this",
+        hint1: "The franchise continues!",
         hint2: "_ e _ _ _ l"
     },
     {
         category: "Clothing",
-        hint1: "Bikers love this!",
+        hint1: "Wear it while you ride a bike",
         hint2: "_ a _ k _ _"
     },
     {
@@ -77,7 +77,7 @@ const medium = [
     },
     {
         category: "Evil Action",
-        hint1: "Taking control over a plane with passengers",
+        hint1: "Taking control of a plane with passengers",
         hint2: "h _ _ a _ k _ _"
     },
     {
@@ -87,7 +87,7 @@ const medium = [
     },
     {
         category: "Legal",
-        hint1: "Courts give this at the end of a hearing",
+        hint1: "The end of a hearing",
         hint2: "j _ _ g _ e _ _"
     },
     {
@@ -96,7 +96,7 @@ const medium = [
         hint2: "_ a _ r _ _ _ e"
     },
     {
-        category: "Physics",
+        category: "Mathematics",
         hint1: "Without me, proving anything is impossible",
         hint2: "_ _ u _ t _ o _"
     },
@@ -107,7 +107,7 @@ const medium = [
     },
     {
         category: "Action",
-        hint1: "To succeed, one should do this daily",
+        hint1: "The acquisition of knowledge or skills",
         hint2: "_ e _ _ n _ _ g"
     },
     {
@@ -132,7 +132,7 @@ const mediumAns = [
 
 const hard = [
     {
-        category: "A type of Art",
+        category: "Sports",
         hint1: "A martial art",
         hint2: "k _ _ k _ o _ i _ _"
     },
@@ -158,7 +158,7 @@ const hard = [
     },
     {
         category: "Education",
-        hint1: "I provide education and help with research",
+        hint1: "Educational institution",
         hint2: "_ _ i _ e r _ i _ _"
     },
     {

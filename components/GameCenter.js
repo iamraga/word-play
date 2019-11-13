@@ -168,8 +168,8 @@ export default class GameCenter extends Component {
                     <Title level={4} style={{marginTop: '15px'}}>The rules are simple</Title>
                     <ul className="rules">
                         <li><Icon type="form" className="bulletin" />There will be 10 rounds</li>
-                        <li><Icon type="form" className="bulletin" />The letters of a word will be given to you jumbled randomly</li>
-                        <li><Icon type="form" className="bulletin" />Rearrange the letter blocks and submit to guess the right word</li>
+                        <li><Icon type="form" className="bulletin" />The jumbled letters of a word will be given to you</li>
+                        <li><Icon type="form" className="bulletin" />Rearrange the letter blocks and submit.</li>
                         <li><Icon type="form" className="bulletin" />If you're out of ideas, you can use up to 2 hints for a word</li>
                         <li><Icon type="form" className="bulletin" />The maximum number of attempts in a round is 3, failing which the round will be marked 'wrongly answered'.</li>
                         <li><Icon type="form" className="bulletin" />Clicking on 'Skip to next word' will mark that word as wrongly answered and will jump to the next word</li>
