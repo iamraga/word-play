@@ -29,7 +29,6 @@ export default class WordPlay extends Component {
 
         return (
             <div className="level-select">
-                <div style={{margin: '20px 0px', fontSize: '16px'}}>Rearrange the letter blocks to guess the actual word</div>
                 <Radio.Group size="large" onChange={this.onLevelChange} defaultValue={this.state.level} style={{margin: '20px 0px'}}>
                     <Radio.Button value='easy' disabled={isGameStarted && level !== 'easy'} >Easy (6 letters)</Radio.Button>
                     <Radio.Button value='medium' disabled={isGameStarted && level !== 'medium'}>Medium (8 letters)</Radio.Button>
