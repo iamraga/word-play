@@ -120,7 +120,7 @@ export default class GameCenter extends Component {
                     noOfAttempts: 0
                 });
             }
-            else if(isLastWord && this.state.noOfAttempts >= 3) {
+            else if(isLastWord && (isAnswerRight || this.state.noOfAttempts >= 3)) {
                 this.setState({isResultPage: true});
             }
         }, 600);
