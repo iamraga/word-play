@@ -127,16 +127,21 @@ export default class GameCenter extends Component {
     }
 
     skip(event) {
-        let round = this.state.round + 1;
-        let currentQn = this.state.questions[round-1];
-        let wrong = this.state.wrong + 1;
-        this.setState({
-            wrong,
-            round,
-            currentQn,
-            currentSortedItems: currentQn.word.split(''),
-            noOfAttempts: 0
-        });
+        if(this.state.round >= this.state.questions.length) {
+            this.setState({isResultPage: true});
+        }
+        else {
+            let round = this.state.round + 1;
+            let currentQn = this.state.questions[round-1];
+            let wrong = this.state.wrong + 1;
+            this.setState({
+                wrong,
+                round,
+                currentQn,
+                currentSortedItems: currentQn.word.split(''),
+                noOfAttempts: 0
+            });
+        }
     }
 
     endGame() {
@@ -239,9 +244,9 @@ export default class GameCenter extends Component {
                     </Row>
                     <Row style={{padding: '20px 0px', width: '100%'}}>
                         <Col span={4} offset={7}>
-                            <Button type="primary" className="actionBtns" onClick={this.skip} disabled={disableNext}>
+                            <Button type="primary" className="actionBtns" onClick={this.skip}>
                                 <Icon type="step-forward"></Icon>
-                                Skip to next word
+                                { disableNext ? 'Skip and end game' :'Skip to next word' }
                             </Button>
                         </Col>
                         <Col span={4} offset={2} style={{textAlign: 'end'}}>
