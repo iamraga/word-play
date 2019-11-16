@@ -15,6 +15,7 @@ This is just a simple react app with no backend code.
 - Kindly do not hit the refresh or back button. This will reset the game and erase your progress.
 
 Give it a shot and see how many words you guess right.
+[You can visit this link and start playing now!](https://word-play.netlify.com/)
 
 Any feedback or correction will be really helpful.
 Get in touch with me on any of the following:
