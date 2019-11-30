@@ -102,7 +102,7 @@ export default class GameCenter extends Component {
             this.setState({
                 noOfAttempts,
             });
-            if(!isAnswerRight && noOfAttempts >= 3) {
+            if(!isAnswerRight && noOfAttempts === 3) {
                 this.setState({wrong: this.state.wrong + 1});
             }
             document.getElementById("letterBlocks").classList.add("wrongAnswer");
